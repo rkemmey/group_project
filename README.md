@@ -9,7 +9,7 @@ The project breakdown:
 ### Backend-- separate app per puzzle, one app that tracks puzzle progress (user_puzzles), one app for user auth
 - utilized base management commands to store all puzzle data in the postgresql database (make the api call once) files are located in the nono/sud apps under the management -> commands folder. I also have a delete in there because at one point I wanted to delete my tables (but haven't used that file since).
 
-### frontend-- uses react/bootstrap + my App.css file
+### Frontend-- uses react/bootstrap + my App.css file
 - utilizes react-router-dom. there is a router page to handle urls (and react-router-dom defined in main.jsx)
 - utilities files is for handling token auth between page refreshes and primarily for functions that perform CRUD operations on the django models (as in access the data on the backend to read, update, delete)
 - pages folder holds different pages
