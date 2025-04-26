@@ -1,5 +1,5 @@
 - I generated my own Django-secret key, as I don’t think the given one was working
-- npm install directions on front-end
+- perhaps also include "npm install" directions since the dependencies need to also be loaded from front-end
 - don’t have access to anything on backend, since I’m not a superuser
 - Utilized my own NOUN API key for NONO_APP to throw into .env file.
 - Can’t fetch Nonogram puzzles after running “python [manage.py](http://manage.py) create_puzzles”
@@ -14,3 +14,7 @@
 - Maybe on NotFound/Error Pages, you can have a timer that re-directs to the homepage, like I had if you accidentally find yourself on them.
 - No message feedback, like logged in successfully or failure, registered successfully or failed. Maybe a message, then a quick message on a timer before getting redirected or letting the user know that they’re not getting logged in.
     - Like if I try to login and I have the correct email address, but my password is wrong, there’s no feedback letting me know that the password is wrong. I just won’t log in.
+Aside from a general styling revamp perhaps with a different library, alert messages could look better utilizing something like react-toast.
+Maybe this upgraded project is something as simple as making it shinier, and adding at least two new games.
+Add an upcoming page perhaps with details of another game(s) that we could think to add after the group project done. There wouldn't need to be any logic. It could just be kind of like the about pages we had for the games.
+Since I didn't get to test Nonograms since I can't fetch the puzzles, I don't have any feedback at this time about them.
