@@ -15,6 +15,11 @@
     border: 1px solid #ccc;
 }
 
+.wrong {
+  color: red;
+  font-weight: bold;
+}
+
 .sudoku-cell.clue {
     background-color: #f0f0f0;
     font-weight: bold;
