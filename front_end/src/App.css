@@ -172,3 +172,43 @@
     cursor: pointer;
     font-size: 0.7rem;
   }
+
+  .board {
+    width: 400px;
+    margin: 40px auto;
+    background: #bbada0;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .board-row {
+    display: flex;
+  }
+  
+  .tile {
+    width: 90px;
+    height: 90px;
+    margin: 5px;
+    background: #cdc1b4;
+    font-size: 24px;
+    font-weight: bold;
+    color: #776e65;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+  }
+  
+  /* Sample tile color styles */
+  .tile-2 { background: #eee4da; }
+  .tile-4 { background: #ede0c8; }
+  .tile-8 { background: #f2b179; color: white; }
+  .tile-16 { background: #f59563; color: white; }
+  .tile-32 { background: #f67c5f; color: white; }
+  .tile-64 { background: #f65e3b; color: white; }
+  .tile-128 { background: #edcf72; color: white; }
+  .tile-256 { background: #edcc61; color: white; }
+  .tile-512 { background: #edc850; color: white; }
+  .tile-1024 { background: #edc53f; color: white; }
+  .tile-2048 { background: #edc22e; color: white; }
+  

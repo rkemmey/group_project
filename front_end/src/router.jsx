@@ -12,6 +12,8 @@ import NotFound from "./pages/NotFound";
 import ErrorPage from "./pages/ErrorPage";
 import SudGame from "./components/SudGame";
 import NonoGame from "./components/NonoGame";
+import TwoFourPage from "./pages/TwoFourPage";
+
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,7 @@ const router = createBrowserRouter([
         { path: "/sudoku/:id", element: <SudGame /> },
         { path: "/nonogram/", element: <NonoPage />},
         { path: "/nonogram/:id", element: <NonoGame /> },
+        { path: "/2048/", element: <TwoFourPage /> },
         { path: "/profile/", element: <ProfilePage />}, 
         { path: "*", element: <NotFound /> },
       ],
