@@ -173,7 +173,7 @@
     font-size: 0.7rem;
   }
 
-  .board {
+  /* .board {
     width: 400px;
     margin: 40px auto;
     background: #bbada0;
@@ -210,5 +210,5 @@
   .tile-256 { background: #edcc61; color: white; }
   .tile-512 { background: #edc850; color: white; }
   .tile-1024 { background: #edc53f; color: white; }
-  .tile-2048 { background: #edc22e; color: white; }
+  .tile-2048 { background: #edc22e; color: white; } 
   
