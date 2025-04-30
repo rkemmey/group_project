@@ -81,7 +81,7 @@ const NonoGrid = ({ rowhint, colhint, solution, savedProgress}) => {
           );
         })
       );
-      setMessage(isCorrect ? "Correct!" : "Incorrect. Try again.");
+      setMessage(isCorrect ? "Correct!" : "Incorrect. Keep trying!");
     };
 
     // Show solution
@@ -108,6 +108,16 @@ const NonoGrid = ({ rowhint, colhint, solution, savedProgress}) => {
         alert('Failed to save progress.');
       }
     };
+
+    const restartPuzzle = () => {
+      const confirmed = window.confirm("Are you sure you want to restart the puzzle? Your current puzzle will be cleared.");
+      const initialGrid = Array(solution.length).fill().map(() => Array(solution.length).fill(0));
+      if (confirmed && solution) {
+          setGrid(initialGrid);
+          setMessage("");
+          setShowingSolution(false);
+      }
+  };
 
     return (
       <>
@@ -158,9 +168,10 @@ const NonoGrid = ({ rowhint, colhint, solution, savedProgress}) => {
            
 
           <div className="button-container">
-            <button className="check-button" onClick={checkSolution}>Check Solution</button>
+            <button className="check-button" onClick={checkSolution}>Check Your Progress</button>
             <button className="check-button" onClick={handleSaveProgress}>Save Progress</button>
             <button className="check-button" onClick={showSolution}>Show Solution</button>
+            <button className="check-button" onClick={restartPuzzle}>Restart Puzzle</button>
             </div>
             {message && <div className="message">{message}</div>}
 

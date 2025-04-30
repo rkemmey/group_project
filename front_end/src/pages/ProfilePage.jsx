@@ -72,7 +72,7 @@ const ProfilePage = () => {
               savedPuzzles.map(puzzle => (
                 <li key={puzzle.id} style={{ alignItems: 'center', gap: '10px' }}>
                   <a href={`/${puzzle.content_type === 1 ? 'sudoku' : 'nonogram'}/${puzzle.object_id}`}
-                    className="custom-link">Continue Puzzle {puzzle.object_id}</a>
+                    className="custom-link">Continue {puzzle.content_type === 1 ? 'Sudoku' : 'Nonogram'} Puzzle {puzzle.object_id}</a>
                   <button onClick={() => handleDelete(puzzle.content_type, puzzle.object_id)} className="delete-button">
                     Click to Delete
                   </button>

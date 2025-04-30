@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 const SudGrid = ({ puzzle, solution, savedProgress }) => {
     const [board, setBoard] = useState([]);
     const [message, setMessage] = useState(""); // Validation message
+    const [wrongCells, setWrongCells] = useState(new Set());
     const [showingSolution, setShowingSolution] = useState(false);
     const { id } = useParams();
 
@@ -32,10 +33,18 @@ const SudGrid = ({ puzzle, solution, savedProgress }) => {
     };
 
     const checkSolution = () => {
-        const isCorrect = board.every((row, rowIndex) =>
-            row.every((cell, colIndex) => cell === solution[rowIndex][colIndex])
-        );
-        setMessage(isCorrect ? "Correct!" : "Incorrect. Try again.");
+        const newWrongCells = new Set();
+        board.forEach((row, rowIndex) => {
+            row.forEach((cell, colIndex) => {
+                if (cell !== solution[rowIndex][colIndex]) {
+                    newWrongCells.add(`${rowIndex}-${colIndex}`);
+                }
+            });
+        });
+        setWrongCells(newWrongCells);
+    
+        const isCorrect = newWrongCells.size === 0;
+        setMessage(isCorrect ? "Correct!" : "The numbers in red are incorrect. Keep trying!");
     };
 
     const showSolution = () => {
@@ -59,6 +68,15 @@ const SudGrid = ({ puzzle, solution, savedProgress }) => {
           }
         };
     
+        const restartPuzzle = () => {
+            const confirmed = window.confirm("Are you sure you want to restart the puzzle? Your current puzzle will be cleared.");
+            if (confirmed && puzzle) {
+                setBoard(puzzle);
+                setMessage("");
+                setShowingSolution(false);
+                setWrongCells(new Set());
+            }
+        };
 
     return (
         <div className="sudoku-container">
@@ -75,18 +93,17 @@ const SudGrid = ({ puzzle, solution, savedProgress }) => {
                                 handleChange(rowIndex, colIndex, event.target.value)
                             }
                             readOnly={!isEditable}
-                            className={`sudoku-cell ${
-                                isEditable ? "editable" : "clue"
-                            }`}
+                            className={`sudoku-cell ${isEditable ? "editable" : "clue"} ${wrongCells.has(`${rowIndex}-${colIndex}`) ? "wrong" : ""}`}
                         />
                     );
                 })
             )}
             </div>
             <div className="button-container">
-                <button className="check-button" onClick={checkSolution}>Check Solution</button>
+                <button className="check-button" onClick={checkSolution}>Check Your Progress</button>
                 <button className="check-button" onClick={handleSaveProgress}>Save Progress</button>
                 <button className="check-button" onClick={showSolution}>Show Solution</button>
+                <button className="check-button" onClick={restartPuzzle}>Restart Puzzle</button>
             </div>
             {message && <div className="message">{message}</div>}
         </div>
