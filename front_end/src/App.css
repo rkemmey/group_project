@@ -1,0 +1,174 @@
+.sudoku-grid {
+    display: grid;
+    grid-template-columns: repeat(9, 40px);
+    gap: 0px;
+    max-width: fit-content;
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.sudoku-cell {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 1px solid #ccc;
+}
+
+.sudoku-cell.clue {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.sudoku-cell.editable {
+    background-color: #ffffff;
+}
+
+.check-button {
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    background-color: #9f65c2;
+    border: 4px solid white;
+    border-radius: 5px;
+    padding: 6px;
+}
+
+.check-button:hover {
+  background-color: black;
+  border-color: black;                
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; 
+  gap: 10px; 
+  margin-top: 20px; 
+}
+
+.message {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 6px;
+    text-align: center;
+}
+
+.grid-wrapper {
+    display: grid;
+    gap: 0px;
+    max-width: fit-content;
+    margin: 0 auto;
+    padding: 5px;
+  }
+  
+  .cell {
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+  }
+  
+  .cell.filled {
+    background-color: black;
+  }
+  
+  .cell.marked {
+    color: red;
+  }
+  
+  .hint-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border: 1px solid transparent;
+    text-align: center;
+    padding: 2px;
+    white-space: nowrap;
+  }
+  
+  .hint-cell.vertical {
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: #9f65c2;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .navbar-left h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: white;
+    padding: 6px;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .navbar-right button {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 4px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease; 
+  }
+
+  .navbar-right button:hover {
+    background-color: black;
+    border-color: black;    
+    color: white;              
+  }
+  
+  .navbar-right span {
+    font-size: 1rem;
+    color: white;
+    padding: 6px;
+  }
+
+  .navbar-right a {
+    color: white;
+    text-decoration: none; 
+  }
+  
+  .navbar-right a:hover {
+    color: black; 
+  }
+
+  .banner-container {
+    background-color: #f8f9fa; 
+    padding: 5px 0; 
+  }
+
+  .custom-link {
+    color: #8b4cad; 
+  }
+  
+  .custom-link:hover {
+    color: black; 
+  }
+
+  .delete-button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 0.7rem;
+  }
