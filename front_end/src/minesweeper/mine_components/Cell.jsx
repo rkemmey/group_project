@@ -1,6 +1,6 @@
 /*
 - stateless cell component represents single cell with custom variables and props.
-- value = properties of cell, onClick = left click, cMenu = right click
+- value = properties of cell
 - function determines the value of the cell based on its state
 */
 const Cell = ({ value, leftClick, rightClick }) => { 
