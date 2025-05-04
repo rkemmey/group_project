@@ -2,8 +2,8 @@ import './minesweeper.css';
 import { useState, useEffect } from 'react';
 import GameInfo from './mine_components/GameInfo';
 import Board from './mine_components/Board';
-import { createEmptyArray, plantMines, 
-  traverseBoard, getNeighborMines, filterBoard
+import { createEmptyBoard, plantMines, 
+  adjacentCells, countNeighborMines, filterCellsByType
 } from './mine_components/mine_utilities';
 
 const Game = () => {
@@ -52,11 +52,11 @@ const Game = () => {
   // initialize game data (board setup)
   const initgameData = (height, width, mines) => {
     // create empty game board
-    let data = createEmptyArray(height, width);
+    let data = createEmptyBoard(height, width);
     // place mines
     data = plantMines(data, height, width, mines);
     // count neighboring mines
-    data = getNeighborMines(data, height, width);
+    data = countNeighborMines(data, height, width);
     return data;
   };
 
@@ -68,15 +68,15 @@ const Game = () => {
   };
 
   // reveal adjacent empty cells and non-mine neighboring cells
-  const revealEmpty = (y, x, data) => {
+  const revealEmptyCells = (y, x, data) => {
     // get grid around the input cell
-    let area = traverseBoard(y, x, data, height, width);
+    let area = adjacentCells(y, x, data, height, width);
     area.forEach(value => {
       // if conditions are met, continue revealing neighbor cells
       if (!value.isFlagged && !value.isRevealed && (value.isEmpty || !value.isMine)) {
         data[value.y][value.x].isRevealed = true;
         if (value.isEmpty) {
-          revealEmpty(value.y, value.x, data);
+          revealEmptyCells(value.y, value.x, data);
         }
       }
     });
@@ -99,10 +99,10 @@ const Game = () => {
     updatedData[y][x].isRevealed = true;
     // if empty, reveal neighboring non-mine cells
     if (updatedData[y][x].isEmpty) {
-      updatedData = revealEmpty(y, x, updatedData);
+      updatedData = revealEmptyCells(y, x, updatedData);
     }
     // if only mines remain unclicked, win game
-    if (filterBoard(updatedData, dataitem => !dataitem.isRevealed).length === mines) {
+    if (filterCellsByType(updatedData, dataitem => !dataitem.isRevealed).length === mines) {
       setMineCount(0);
       setGameStatus("You Win!");
       revealBoard();
@@ -110,7 +110,7 @@ const Game = () => {
     }
     setGameData(updatedData);
     // update mine-counter
-    setMineCount(mines - filterBoard(updatedData, dataitem => dataitem.isFlagged).length);
+    setMineCount(mines - filterCellsByType(updatedData, dataitem => dataitem.isFlagged).length);
   };
 
   // handle right-click logic
@@ -134,8 +134,8 @@ const Game = () => {
     }
 
     if (minesLeft === 0) {
-      const mineArray = filterBoard(updatedData, dataitem => dataitem.isMine);
-      const flagArray = filterBoard(updatedData, dataitem => dataitem.isFlagged);
+      const mineArray = filterCellsByType(updatedData, dataitem => dataitem.isMine);
+      const flagArray = filterCellsByType(updatedData, dataitem => dataitem.isFlagged);
       // check for winning condition:
       // win if flagged cells === cells with mines
       if (JSON.stringify(mineArray) === JSON.stringify(flagArray)) {

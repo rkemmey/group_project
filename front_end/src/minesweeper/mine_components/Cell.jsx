@@ -3,7 +3,7 @@
 - value = properties of cell, onClick = left click, cMenu = right click
 - function determines the value of the cell based on its state
 */
-const Cell = ({ value, onClick, cMenu }) => { 
+const Cell = ({ value, leftClick, rightClick }) => { 
   const getValue = () => {
     // if cell not revealed, show either a flag or nothing
     if (!value.isRevealed) {
@@ -38,7 +38,7 @@ const Cell = ({ value, onClick, cMenu }) => {
 
   // return cell as a div with both event handlers and className
   return ( 
-    <div onClick={onClick} className={className} onContextMenu={cMenu}>
+    <div onClick={leftClick} className={className} onContextMenu={rightClick}>
       {getValue()}
     </div>
   );

@@ -1,7 +1,7 @@
 // Utility functions for use on game board
 
 //create the initial array of data for all cells in the grid
-export const createEmptyArray = (height, width) => {
+export const createEmptyBoard = (height, width) => {
   let data = [];
   // outer loop through the grid rows
   for (let i = 0; i < height; i++) {
@@ -26,7 +26,7 @@ export const createEmptyArray = (height, width) => {
 };
 
 //get grid of neighbored cells around the current cell
-export const traverseBoard = (y, x, data, height, width) => {
+export const adjacentCells = (y, x, data, height, width) => {
   // array to store neighboring cells
   const el = [];
   // looping clockwise around the cell starting with left cell
@@ -50,8 +50,8 @@ if (y > 0 && x > 0) el.push(data[y - 1][x - 1]);
 };
 
 //Get random number within grid's height or width
-export const getRandomNumber = (dimension) => {
-  return Math.floor((Math.random() * 1000) + 1) % dimension;
+export const getRandomNumber = (measurement) => {
+  return Math.floor((Math.random() * 1000) + 1) % measurement;
 };
 
 //Plant mines in random cells in the grid
@@ -74,7 +74,7 @@ export const plantMines = (data, height, width, mines) => {
 };
 
 // get the count of mines in cells bordering the current cell
-export const getNeighborMines = (data, height, width) => {
+export const countNeighborMines = (data, height, width) => {
   // copy original grid to avoid mutating input data
   // loop through all rows and columns
   let updatedData = data;
@@ -83,8 +83,8 @@ export const getNeighborMines = (data, height, width) => {
       // only process cells that aren't mines
       if (!data[i][j].isMine) {
           let mine = 0;
-          const area = traverseBoard(data[i][j].y, data[i][j].x, data, height, width);
-          // loop through neighboring cells from traverseBoard
+          const area = adjacentCells(data[i][j].y, data[i][j].x, data, height, width);
+          // loop through neighboring cells from adjacentCells
           area.forEach(value => {
           // if the cell contains a mine, increment the count
           if (value.isMine) {
@@ -105,7 +105,7 @@ export const getNeighborMines = (data, height, width) => {
 };
 
 // filter the board based on condition defined by checkType (flagged or mine)
-export const filterBoard = (data, checkType) => {
+export const filterCellsByType = (data, checkType) => {
   // initialize array to store cells that meet the condition
   let resultArray = [];
   // loop through each row, followed by each cell
