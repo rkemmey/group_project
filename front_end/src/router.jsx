@@ -13,6 +13,7 @@ import ErrorPage from "./pages/ErrorPage";
 import SudGame from "./components/SudGame";
 import NonoGame from "./components/NonoGame";
 import TwoFourPage from "./pages/TwoFourPage";
+import PuzzleFifteen from "./pages/PuzzleFifteen";
 
 
 const router = createBrowserRouter([
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
         { path: "/nonogram/", element: <NonoPage />},
         { path: "/nonogram/:id", element: <NonoGame /> },
         { path: "/2048/", element: <TwoFourPage /> },
+        { path: "/puzzle-15/", element: <PuzzleFifteen /> },
         { path: "/profile/", element: <ProfilePage />}, 
         { path: "*", element: <NotFound /> },
       ],

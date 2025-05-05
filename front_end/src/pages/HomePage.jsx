@@ -8,16 +8,16 @@ function HomePage() {
     <div className="container text-center my-2">
       <div className="banner-container text-center">
         <h1 className="display-4 fw-semibold" style={{ color: '#8b4cad' }}>
-          Welcome to Pixel Puzzles!
+          Welcome to PuzzleCraft!
         </h1>
       </div>
       
       <div className="rounded p-1 mb-4">
         <p className="mb-0 fw-semibold">
-      Pixel Puzzles bridges the gap between casual relaxation and mental challenge by providing 
-      an expansive library of nonogram and sudoku puzzles, with multiple difficulty levels, 
-      and progress tracking. Whether you're a beginner or a seasoned solver, our platform makes 
-      it easy to dive into the world of nonograms and experience the joy of uncovering pixel-perfect art through logic.
+      PuzzleCraft bridges the gap between casual relaxation and mental challenge by providing 
+      an expansive library of logic puzzles, with multiple difficulty levels, 
+      and progress tracking. Whether you're killing five minutes or spending your evening sharpening your 
+      logical reasoning, PuzzleCraft makes it easy to experience the joy of mastering puzzles.
         </p>
       </div>
 
