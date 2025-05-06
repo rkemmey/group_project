@@ -1,5 +1,5 @@
 //Letter.jsx
-import { useContext} from 'react'
+import { useContext } from 'react'
 import { WordleContext } from '../WordleContext';
 
 const Letter = ({ letterPos, attemptVal }) => {
