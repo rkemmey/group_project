@@ -79,7 +79,7 @@ const PuzzleFifteen = () => {
         <div className="container d-flex flex-column justify-content-center align-items-center">
         <h2>15 Puzzle</h2>
         <p>Moves: {moves}</p>
-        {won && <p style={{ color: 'green', fontWeight: 'bold' }}>Congrats! You won!</p>}
+        {won && <p style={{ color: 'green', fontSize: '100px', fontWeight: 'bold' }}>Congrats! You won!</p>}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 60px)', gap: '5px', marginBottom: '10px' }}>
         {tiles.map((tile, i) => (
             <button
