@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import sudImg from '../assets/sud.png';
-import nonoImg from '../assets/nono.png';
 import { useOutletContext, useNavigate } from "react-router-dom";
 import { userLogIn } from "../utilities";
 import { Form, Button } from 'react-bootstrap';
