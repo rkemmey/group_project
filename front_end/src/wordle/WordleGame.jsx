@@ -19,11 +19,16 @@ import { WordleContext } from './WordleContext';
 
 const WordleGame = () => {
   const [board, setBoard] = useState(boardDefault)
+  const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letterPos: 0})
+
   return (
       <div className="wordleGame">
-        <WordleContext.Provider value={{board, setBoard}}>
-          <Board />
-          <KeyBoard />
+        <WordleContext.Provider 
+          value={{board, setBoard, currAttempt, setCurrAttempt}}>
+          <div className="wordleGame">
+            <Board />
+            <KeyBoard />
+          </div>
         </WordleContext.Provider>
       </div>
   );
