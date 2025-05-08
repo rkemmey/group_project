@@ -4,14 +4,16 @@ import { WordleContext } from '../WordleContext';
 
 
 const Key = ({ keyVal, bigKey} ) => {
-  const { board, setBoard, currAttempt, setCurrAttempt } = useContext(WordleContext)
+  const { onSelectLetter, onDelete, onEnter } = useContext(WordleContext)
   
   const selectLetter = () => {
-    const newBoard = [...board]
-    newBoard[currAttempt.attempt][currAttempt.letterPos] = keyVal
-    setBoard(newBoard)
-    setCurrAttempt({...currAttempt, letterPos: currAttempt.letterPos + 1})
-
+    if (keyVal === "ENTER") {
+      onEnter()
+    } else if (keyVal === "DELETE") {
+      onDelete()
+    } else {
+      onSelectLetter(keyVal)
+    }
   }
   
   return (

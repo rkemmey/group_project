@@ -14,6 +14,8 @@ import SudGame from "./components/SudGame";
 import NonoGame from "./components/NonoGame";
 import MineGame from "./minesweeper/MineGame";
 import WordleGame from "./wordle/WordleGame";
+import AboutMine from "./minesweeper/AboutMine";
+import AboutWordle from "./wordle/AboutWordle";
 
 const router = createBrowserRouter([
     {
@@ -30,7 +32,9 @@ const router = createBrowserRouter([
         { path: "/nonogram/", element: <NonoPage />},
         { path: "/nonogram/:id", element: <NonoGame /> },
         { path: "/minesweeper/", element: <MineGame /> },
+        { path: "/about-mine/", element: <AboutMine /> },
         { path: "/wordle/", element: <WordleGame /> },
+        { path: "/about-wordle/", element: <AboutWordle /> },
         { path: "/profile/", element: <ProfilePage />}, 
         { path: "*", element: <NotFound /> },
       ],
