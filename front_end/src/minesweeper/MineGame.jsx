@@ -37,6 +37,7 @@ const Game = () => {
   // update board settings when difficulty changes
   useEffect(() => {
     const { height, width, mines } = getBoardSettings(difficulty);
+    setGameStatus("Game in progress");
     setHeight(height);
     setWidth(width);
     setMines(mines);
