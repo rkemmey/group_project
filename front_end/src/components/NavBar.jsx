@@ -12,14 +12,10 @@ export default function NavBar({ user, setUser }) {
         <h1>PuzzleCraft</h1>
       </div>
       <div className="navbar-right">
-      <Link to={"/"}>Home</Link><br></br>
+      {/* <Link to={"/"}>Home</Link><br></br> */}
         {user ? (
           <>
-            <Link to={"/sudoku/"}>Sudoku</Link><br></br>
-            <Link to={"/nonogram/"}>Nonogram</Link><br></br>
-            <Link to={"/2048/"}>2048</Link><br></br>
-            <Link to={"/puzzle-15/"}>15 Tiles</Link><br></br>
-            <Link to={"/dashboard/"}>Dashboard</Link><br></br>
+            <Link to={"/dashboard/"}>Puzzle Dashboard</Link><br></br>
             <Link to={"/profile/"}>Profile</Link>
             <button 
               onClick={ async () => 
