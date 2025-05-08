@@ -7,7 +7,7 @@ import { createEmptyBoard, plantMines,
 } from './mine_components/mine_utilities';
 
 const Game = () => {
-  // difficulty and board settings (default being easy)
+  // difficulty and board settings (easy is default)
   const [difficulty, setDifficulty] = useState("easy");
   const [height, setHeight] = useState(8);
   const [width, setWidth] = useState(8);
