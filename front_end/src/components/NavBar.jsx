@@ -18,7 +18,9 @@ export default function NavBar({ user, setUser }) {
             <Link to={"/sudoku/"}>Sudoku</Link><br></br>
             <Link to={"/nonogram/"}>Nonogram</Link><br></br>
             <Link to={"/minesweeper/"}>Minesweeper</Link><br></br>
+            <Link to={"/about-mine/"}>AboutMine</Link><br></br>
             <Link to={"/wordle/"}>Wordle</Link><br></br>
+            <Link to={"/about-wordle/"}>AboutWordle</Link><br></br>
             <Link to={"/profile/"}>Profile</Link>
             <button 
               onClick={ async () => 
