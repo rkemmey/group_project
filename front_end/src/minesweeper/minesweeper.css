@@ -94,17 +94,14 @@ body {
 
 .controls {
   display: flex;
-  justify-content: center; /* Center the whole group */
+  justify-content: center;
   align-items: center;
-  gap: 1rem; /* Space between dropdown and reset button */
+  gap: 1rem; 
   margin-bottom: 1rem;
 }
-
-
 
 .board {
   display: grid;
   gap: 2px;
   justify-content: center;
 }
-
