@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import sudImg from '../assets/sud.png';
 import nonoImg from '../assets/nono.png';
+import tentsImg from '../assets/sud.png';
+import kakuroImg from '../assets/nono.png';
 
 function HomePage() {
   return (
@@ -54,6 +56,43 @@ function HomePage() {
           </div>
         </Link>
       </div>
+
+      <div className="col-md-6 mb-1">
+        <Link to="/about-tents" className="text-decoration-none text-dark">
+          <div className="card h-100 bg-light">
+            <div className="card-body">
+              <h5 className="card-title">Learn About Tents</h5>
+              <img 
+                src={tentsImg} 
+                style={{ width: '20%', height: 'auto' }} 
+                alt="Tents Puzzle" 
+              />
+              <p className="card-text">
+                A fun puzzle where you pitch tents next to trees using logic and deduction.
+              </p>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      <div className="col-md-6 mb-1">
+        <Link to="/about-kakuro" className="text-decoration-none text-dark">
+          <div className="card h-100 bg-light">
+            <div className="card-body">
+              <h5 className="card-title">Learn About Kakuro</h5>
+              <img 
+                src={kakuroImg} 
+                style={{ width: '20%', height: 'auto' }} 
+                alt="Kakuro Puzzle" 
+              />
+              <p className="card-text">
+                Solve crossword-style number puzzles that test your arithmetic and logic skills.
+              </p>
+            </div>
+          </div>
+        </Link>
+      </div>
+
     </div>
 
 
