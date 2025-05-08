@@ -93,8 +93,14 @@ body {
 }
 
 .controls {
+  display: flex;
+  justify-content: center; /* Center the whole group */
+  align-items: center;
+  gap: 1rem; /* Space between dropdown and reset button */
   margin-bottom: 1rem;
 }
+
+
 
 .board {
   display: grid;

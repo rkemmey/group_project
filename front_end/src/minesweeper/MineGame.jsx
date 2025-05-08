@@ -42,7 +42,7 @@ const Game = () => {
     setWidth(width);
     setMines(mines);
     setMineCount(mines);
-    setKey(prev => !prev); // trigger board reset
+    setKey(prev => !prev);
   }, [difficulty]);
 
   // initialize board on mount and when difficulty changes or reset
@@ -163,26 +163,30 @@ const Game = () => {
   - render button for restarting game
   */
   return (
-    <div className='game'>
+    <div className="game">
       <div className="controls">
-        <label htmlFor="difficulty">Difficulty:</label>
-        <select
-          id="difficulty"
-          value={difficulty}
-          onChange={(e) => setDifficulty(e.target.value)}
-        >
-          <option value="easy">Easy (8×8, 10 mines)</option>
-          <option value="medium">Medium (12×12, 20 mines)</option>
-          <option value="hard">Hard (16×16, 40 mines)</option>
-        </select>
+        <div>
+          <label htmlFor="difficulty">Difficulty:</label>
+          <select
+            id="difficulty"
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+            style={{ marginLeft: '0.5rem' }} // optional spacing between label and select
+          >
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+        </div>
+        <button className="reset-button" onClick={resetGame}>Reset</button>
       </div>
+  
       <GameInfo mineCount={mineCount} gameStatus={gameStatus} />
       <Board
         data={gameData}
         handleCellClick={handleCellClick}
         handleContextMenu={handleContextMenu}
       />
-      <button className="reset-button" onClick={resetGame}>Reset</button>
     </div>
   );
 };
