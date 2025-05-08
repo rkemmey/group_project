@@ -15,6 +15,7 @@ import NonoGame from "./components/NonoGame";
 import TwoFourPage from "./pages/TwoFourPage";
 import PuzzleFifteen from "./pages/PuzzleFifteen";
 import Dashboard from "./pages/Dashboard";
+import MineGame from "./minesweeper/MineGame";
 
 
 const router = createBrowserRouter([
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
         { path: "/nonogram/:id", element: <NonoGame /> },
         { path: "/2048/", element: <TwoFourPage /> },
         { path: "/puzzle-15/", element: <PuzzleFifteen /> },
+        { path: "/minesweeper/", element: <MineGame /> },
         { path: "/profile/", element: <ProfilePage />}, 
         { path: "/dashboard/", element: <Dashboard />}, 
         { path: "*", element: <NotFound /> },
