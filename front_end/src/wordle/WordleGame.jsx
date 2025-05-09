@@ -11,18 +11,18 @@ const WordleGame = () => {
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letterPos: 0})
   const [wordSet, setWordSet] = useState(new Set())
   const [disabledLetters, setDisabledLetters] = useState([])
-  // const [correctWord, setCorrectWord] = useState("")
+  const [correctWord, setCorrectWord] = useState("")
   const [gameOver, setGameOver] = useState({
     gameOver: false,
     guessedWord: false,
   })
 
-  const correctWord = "RIGHT"
+  // const correctWord = "RIGHT"
 
   useEffect(() => {
     generateWordSet().then((words) => {
       setWordSet(words.wordSet)
-      // setCorrectWord(words.todaysWord)
+      setCorrectWord(words.todaysWord.toUpperCase())
     })
   }, [])
 
@@ -84,7 +84,6 @@ const WordleGame = () => {
           <div className="wordleGame">
             <Board />
             <button onClick={handleReset} className="reset-button">Reset</button>
-
             {gameOver.gameOver ? <GameOver/> : <KeyBoard />}
           </div>
         </WordleContext.Provider>
