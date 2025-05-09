@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import { WordleContext } from '../WordleContext';
 
 
-const Key = ({ keyVal, bigKey} ) => {
+const Key = ({ keyVal, bigKey, disabled } ) => {
   const { onSelectLetter, onDelete, onEnter } = useContext(WordleContext)
   
   const selectLetter = () => {
@@ -17,7 +17,9 @@ const Key = ({ keyVal, bigKey} ) => {
   }
   
   return (
-    <div className="key" id={bigKey && "big"} onClick={selectLetter}>
+    <div className="key" 
+      id={bigKey ? "big" : disabled && "disabled"} 
+      onClick={selectLetter}>
       {keyVal}
     </div>
   )

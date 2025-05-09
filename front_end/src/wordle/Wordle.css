@@ -4,7 +4,7 @@
   height: calc(100vh - 170px);
   display: flex;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 20px;
   flex-direction: column;
 }
 
@@ -30,7 +30,7 @@
 .keyboard {
   width: 700px;
   height: 300px;
-  margin-top: 60px;
+  margin-top: 10px;
 }
 
 .line1 {
@@ -84,5 +84,9 @@
 
 #error {
   background-color: #808085;
+}
+
+#disabled {
+  background-color: #3a393c;
 }
 

@@ -1,17 +1,7 @@
-// const WordleGame = () => {
-  
-//   return (
-//     <div className="p-8 text-center">
-//       <h2 className="text-4xl font-bold">WordleGame</h2>
-//     </div>
-//   );
-// };
-
-// export default WordleGame;
-// WordleGame.jsx
 import './wordle.css'
 import Board from './wordle_components/Board';
 import KeyBoard from './wordle_components/KeyBoard';
+import GameOver from './wordle_components/GameOver';
 import { boardDefault, generateWordSet } from './Words';
 import { useState, useEffect } from 'react';
 import { WordleContext } from './WordleContext';
@@ -20,6 +10,11 @@ const WordleGame = () => {
   const [board, setBoard] = useState(boardDefault)
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letterPos: 0})
   const [wordSet, setWordSet] = useState(new Set())
+  const [disabledLetters, setDisabledLetters] = useState([])
+  const [gameOver, setGameOver] = useState({
+    gameOver: false,
+    guessedWord: false,
+  })
 
   const correctWord = "RIGHT"
 
@@ -48,16 +43,48 @@ const WordleGame = () => {
 
   const onEnter = () => {
     if (currAttempt.letterPos !== 5) return;
-    setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPos : 0});
+    let currWord = ""
+    for (let i = 0; i < 5; i++){
+      currWord += board[currAttempt.attempt][i]
+    }
+    
+    if (wordSet.has(currWord.toLowerCase())){
+      setCurrAttempt({ attempt: currAttempt.attempt + 1, letterPos : 0});
+    } else {
+      alert("Word Not Found")
+    }
+    
+    if (currWord === correctWord){
+      setGameOver({gameOver: true, guessedWord: true })
+      return;
+    }
+
+    if (currAttempt.attempt === 5){
+      setGameOver({gameOver: true, guessedWord: false })
+      return;
+    }
   }
+
+  const handleReset = () => {
+    window.location.reload();
+  }
+  
 
   return (
       <div className="wordleGame">
         <WordleContext.Provider 
-          value={{board, setBoard, currAttempt, setCurrAttempt, onSelectLetter, onDelete, onEnter, correctWord}}>
+          value={{
+            board, setBoard, 
+            currAttempt, setCurrAttempt, 
+            onSelectLetter, onDelete, onEnter, 
+            correctWord, 
+            disabledLetters, setDisabledLetters, 
+            gameOver, setGameOver}}>
           <div className="wordleGame">
             <Board />
-            <KeyBoard />
+            <button onClick={handleReset} className="reset-button">Reset</button>
+
+            {gameOver.gameOver ? <GameOver/> : <KeyBoard />}
           </div>
         </WordleContext.Provider>
       </div>
