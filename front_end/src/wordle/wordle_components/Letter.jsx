@@ -4,11 +4,13 @@ import { WordleContext } from '../WordleContext';
 
 const Letter = ({ letterPos, attemptVal }) => {
   const { board, correctWord, currAttempt, disabledLetters, setDisabledLetters } = useContext(WordleContext);
+  // get specific letter at current position
   const letter = board[attemptVal][letterPos];
   const isCorrect = correctWord.toUpperCase()[letterPos] === letter;
   const isAlmost = letter !== "" && !isCorrect && correctWord.includes(letter);
+  // holds CSS ClassName for stlying letter appropriately
   let letterState = "";
-  // check if the current attempt is greater than the attempt value
+  // only assign styling if the attempt has already been made
   if (currAttempt.attempt > attemptVal) {
     if (isCorrect) {
       letterState = "correct";
@@ -19,6 +21,7 @@ const Letter = ({ letterPos, attemptVal }) => {
     }
   }
 
+  // add letter to list of disabled keys if its incorrect and not already disabled
   useEffect(() => {
     if (
       letter !== "" &&
@@ -30,6 +33,7 @@ const Letter = ({ letterPos, attemptVal }) => {
     }
   }, [currAttempt.attempt, letter, isCorrect, isAlmost, disabledLetters, setDisabledLetters]);  
 
+  // displays letter with styling class based on "correctness"
   return (
     <div className="letter" id={letterState}>
       {letter}

@@ -5,6 +5,8 @@ import { WordleContext } from '../WordleContext';
 const GameOver = () => {
   const { gameOver, currAttempt, correctWord } = useContext(WordleContext)
 
+  // display different messages based on correct or incorrect guesses
+  // also show number of attempts if the game is won
   return (
     <div className="gameOver">
       <h3>{gameOver.guessedWord ? "You Correctly Guessed" : "You failed"}</h3>

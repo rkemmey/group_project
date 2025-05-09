@@ -6,6 +6,7 @@ import { WordleContext } from '../WordleContext';
 const Key = ({ keyVal, bigKey, disabled } ) => {
   const { onSelectLetter, onDelete, onEnter } = useContext(WordleContext)
   
+  // handle key selection
   const selectLetter = () => {
     if (keyVal === "ENTER") {
       onEnter()
@@ -16,6 +17,7 @@ const Key = ({ keyVal, bigKey, disabled } ) => {
     }
   }
   
+  // set css class big or disabled as appropriate, display key value
   return (
     <div className="key" 
       id={bigKey ? "big" : disabled && "disabled"} 
