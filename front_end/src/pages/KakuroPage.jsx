@@ -4,6 +4,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import KakuroGrid from '../components/KakuroGrid';
 import '../components/KakuroGrid.css';
+import ConfettiEffect from '../components/ConfettiEffect';
+import CompletionBanner from '../components/CompletionBanner';
 
 const API_BASE_URL = import.meta.env.MODE === 'development'
   ? 'http://127.0.0.1:8000/api/kakuro'
@@ -22,6 +24,8 @@ const KakuroPage = () => {
   const [elapsed, setElapsed] = useState(0);
   const [solution, setSolution] = useState(null);
   const [paused, setPaused] = useState(false); // ✅ New state for pause
+  const [isComplete, setIsComplete] = useState(false);
+  const [solutionRevealed, setSolutionRevealed] = useState(false);
 
   useEffect(() => {
     const fetchPuzzle = async () => {
@@ -108,42 +112,46 @@ const KakuroPage = () => {
     }
   };
 
-  const handleCheck = async () => {
-    try {
-      const { data } = await axios.get(`${API_BASE_URL}/solution/${id}/`);
-      const solution = data.solution;
-      let correct = true;
-
-      solution.forEach((row, i) =>
-        row.forEach((cell, j) => {
-          const key = `${i}-${j}`;
-          if (typeof cell === 'number' && parseInt(userProgress[key], 10) !== cell) {
-            correct = false;
-          }
-        })
-      );
-
-      alert(correct ? "✅ Correct solution!" : "❌ Incorrect entries found.");
-    } catch (err) {
-      console.error("Solution check failed:", err);
+  const handleCheck = () => {
+    if (solutionRevealed) {
+      alert("⚠️ You viewed the solution — puzzle won't be marked complete.");
+      return;
+    }
+  
+    let correct = true;
+    for (let i = 0; i < solution.length; i++) {
+      for (let j = 0; j < solution[i].length; j++) {
+        if (solution[i][j] !== null && userProgress[`${i}-${j}`] !== solution[i][j]) {
+          correct = false;
+          break;
+        }
+      }
+      if (!correct) break;
+    }
+  
+    if (correct) {
+      setIsComplete(true);
+      setPaused(true); // pause timer if you have it
+      alert("🎉 Puzzle solved!");
+    } else {
+      alert("❌ There are mistakes.");
     }
   };
 
-  const handleViewSolution = async () => {
-    try {
-      const { data } = await axios.get(`${API_BASE_URL}/solution/${id}/`);
-      const filled = {};
-      data.solution.forEach((row, i) =>
-        row.forEach((cell, j) => {
-          if (typeof cell === 'number') filled[`${i}-${j}`] = cell.toString();
-        })
-      );
-      setUserProgress(filled);
-      alert("👀 Solution loaded.");
-    } catch (err) {
-      console.error("Failed to load solution:", err);
-    }
+  const handleViewSolution = () => {
+    setSolutionRevealed(true);
+    const filled = {};
+    solution.forEach((row, i) => {
+      row.forEach((val, j) => {
+        if (val !== null) {
+          filled[`${i}-${j}`] = val;
+        }
+      });
+    });
+    setUserProgress(filled);
+    alert("👀 Solution loaded.");
   };
+  
 
   const generateNewPuzzle = async () => {
     try {
@@ -230,6 +238,17 @@ const KakuroPage = () => {
         onCellChange={updateProgress}
         solution={solution}
       />
+
+      {isComplete && !solutionRevealed && (
+        <>
+          <ConfettiEffect />
+          <CompletionBanner
+            time={formatTime(elapsed)}
+            onNewPuzzle={handleNewPuzzle}
+            onHome={() => navigate("/")}
+          />
+        </>
+      )}
 
       <div className="mt-4 d-flex justify-content-center gap-2 flex-wrap">
         <button className="btn btn-success" onClick={() => handleButtonAction('save')}>Save</button>

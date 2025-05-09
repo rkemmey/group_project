@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import TentsGrid from '../components/TentsGrid';
+import ConfettiEffect from '../components/ConfettiEffect';
+import CompletionBanner from '../components/CompletionBanner';
 
 const API_BASE_URL = import.meta.env.MODE === 'development'
   ? 'http://127.0.0.1:8000/api/tents'
@@ -20,6 +22,8 @@ const TentsPage = () => {
   const [elapsed, setElapsed] = useState(0);
   const [paused, setPaused] = useState(false);
   const [allPuzzles, setAllPuzzles] = useState([]);
+  const [isComplete, setIsComplete] = useState(false);
+  const [solutionRevealed, setSolutionRevealed] = useState(false);
 
   useEffect(() => {
     const fetchPuzzle = async () => {
@@ -101,6 +105,11 @@ const TentsPage = () => {
   const handleCheck = () => {
     if (!solution) return;
   
+    if (solutionRevealed) {
+      alert("👀 You viewed the solution — puzzle won't be marked complete.");
+      return;
+    }
+  
     let correct = true;
     for (let i = 0; i < solution.length; i++) {
       for (let j = 0; j < solution[i].length; j++) {
@@ -114,10 +123,17 @@ const TentsPage = () => {
       if (!correct) break;
     }
   
-    alert(correct ? "✅ Correct solution!" : "❌ There are mistakes.");
+    if (correct) {
+      setIsComplete(true);
+      setPaused(true); // Stop the timer
+      alert("🎉 Correct! You solved the puzzle!");
+    } else {
+      alert("❌ There are mistakes.");
+    }
   };
 
   const handleViewSolution = () => {
+    setSolutionRevealed(true);
     const filled = {};
     solution.forEach((row, i) => {
       row.forEach((cell, j) => {
@@ -192,6 +208,17 @@ const TentsPage = () => {
         onCellChange={updateProgress}
         solution={solution}
       />
+
+      {isComplete && !solutionRevealed && (
+        <>
+          <ConfettiEffect />
+          <CompletionBanner
+            time={elapsed}
+            onNewPuzzle={() => navigate('/tents/new')}
+            onHome={() => navigate('/')}
+          />
+        </>
+      )}
 
       <div className="mt-4 d-flex justify-content-center gap-2 flex-wrap">
         <button className="btn btn-success" onClick={() => handleButtonAction('save')}>Save</button>
