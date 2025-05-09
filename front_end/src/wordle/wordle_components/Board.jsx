@@ -1,6 +1,7 @@
 // Board.jsx
 import Letter from "./Letter"
 
+// renders rows of letters (6 rows, each with 5 letters)
 const Board = () => {
   return (
     <div className="wordleboard">
