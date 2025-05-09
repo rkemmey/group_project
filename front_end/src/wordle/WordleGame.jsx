@@ -71,7 +71,6 @@ const WordleGame = () => {
     window.location.reload();
   }
   
-
   return (
       <div className="wordleGame">
         <WordleContext.Provider 
