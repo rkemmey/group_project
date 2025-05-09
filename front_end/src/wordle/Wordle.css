@@ -14,7 +14,6 @@
   gap: 5px;
 }
 
-
 .letter {
   width: 50px;
   height: 50px;
@@ -89,4 +88,3 @@
 #disabled {
   background-color: #3a393c;
 }
-

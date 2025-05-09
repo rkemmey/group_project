@@ -1,3 +1,4 @@
+//WordleGame.jsx
 import './wordle.css'
 import Board from './wordle_components/Board';
 import KeyBoard from './wordle_components/KeyBoard';
