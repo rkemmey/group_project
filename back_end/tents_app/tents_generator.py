@@ -25,13 +25,13 @@ def is_valid_tent(board, row, col):
     return True
 
 
-def adjacent_positions(r, c, size):
-    """Return orthogonal adjacent positions for a given cell."""
-    return [
-        (r + dr, c + dc)
-        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]
-        if 0 <= r + dr < size and 0 <= c + dc < size
-    ]
+# def adjacent_positions(r, c, size):
+#     """Return orthogonal adjacent positions for a given cell."""
+#     return [
+#         (r + dr, c + dc)
+#         for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1)]
+#         if 0 <= r + dr < size and 0 <= c + dc < size
+#     ]
 
 
 def generate_tents_solution(layout):

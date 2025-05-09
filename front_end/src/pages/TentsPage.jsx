@@ -100,15 +100,20 @@ const TentsPage = () => {
 
   const handleCheck = () => {
     if (!solution) return;
+  
     let correct = true;
-    solution.forEach((row, i) => {
-      row.forEach((cell, j) => {
-        const key = `${i}-${j}`;
-        if (cell !== userProgress[key]) {
+    for (let i = 0; i < solution.length; i++) {
+      for (let j = 0; j < solution[i].length; j++) {
+        const isTent = solution[i][j] === 'tent';
+        const userMarked = userProgress[`${i}-${j}`] === 'tent';
+        if (isTent !== userMarked) {
           correct = false;
+          break;
         }
-      });
-    });
+      }
+      if (!correct) break;
+    }
+  
     alert(correct ? "✅ Correct solution!" : "❌ There are mistakes.");
   };
 
