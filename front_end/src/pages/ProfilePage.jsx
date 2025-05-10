@@ -87,6 +87,8 @@ const ProfilePage = () => {
           <ul>
             <li><Link to="/about-sudoku" className="custom-link">Learn How to Play Sudoku</Link></li>
             <li><Link to="/about-nonogram" className="custom-link">Learn How to Play Nonogram</Link></li>
+            <li><Link to="/about-kakuro" className="custom-link">About Kakuro</Link></li>
+            <li><Link to="/about-tents" className="custom-link">About Tents</Link></li>
           </ul>
         </div>
 

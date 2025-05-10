@@ -16,6 +16,8 @@ import KakuroPage from "./pages/KakuroPage";
 import TentsPage from "./pages/TentsPage";
 import KakuroNewPage from "./pages/KakuroNewPage";
 import TentsNewPage from "./pages/TentsNewPage";
+import AboutKakuro from "./pages/AboutKakuro";
+import AboutTents from "./pages/AboutTents";
 
 const router = createBrowserRouter([
     {
@@ -27,6 +29,10 @@ const router = createBrowserRouter([
         { path: "/signup/", element: <SignUp />},
         { path: "/about-sudoku/", element: <AboutSud />},
         { path: "/about-nonogram/", element: <AboutNono />},
+
+        { path: "/about-kakuro/", element: <AboutKakuro />},
+        { path: "/about-tents/", element: <AboutTents />},
+
         { path: "/sudoku/", element: <SudPage />},
         { path: "/nonogram/", element: <NonoPage />},
         { path: "/nonogram/:id", element: <NonoGame /> },
