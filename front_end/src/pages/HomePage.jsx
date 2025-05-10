@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import { userLogIn } from "../utilities";
 import { Form, Button } from 'react-bootstrap';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import sudImg from '../assets/sud.png';
+import nonoImg from '../assets/nono.png';
+import tentsImg from '../assets/sud.png';
+import kakuroImg from '../assets/nono.png';
 
 function HomePage() {
     const [email, setEmail] = useState("");
@@ -87,6 +93,88 @@ function HomePage() {
           </div>
         </div>
       </div>
+      <div className="col-md-6 mb-1">
+        <Link to="/about-nonogram" className="text-decoration-none text-dark">
+          <div className="card h-100 bg-light">
+            <div className="card-body">
+              <h5 className="card-title">Learn About Nonograms</h5>
+              <img 
+                src={nonoImg} 
+                style={{ width: '20%', height: 'auto' }} />
+              <br></br>
+              <p className="card-text">
+                Discover how to solve nonograms and uncover pixel art using logic and numerical clues.
+              </p>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      <div className="col-md-6 mb-1">
+        <Link to="/about-tents" className="text-decoration-none text-dark">
+          <div className="card h-100 bg-light">
+            <div className="card-body">
+              <h5 className="card-title">Learn About Tents</h5>
+              <img 
+                src={tentsImg} 
+                style={{ width: '20%', height: 'auto' }} 
+                alt="Tents Puzzle" 
+              />
+              <p className="card-text">
+                A fun puzzle where you pitch tents next to trees using logic and deduction.
+              </p>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+      <div className="col-md-6 mb-1">
+        <Link to="/about-kakuro" className="text-decoration-none text-dark">
+          <div className="card h-100 bg-light">
+            <div className="card-body">
+              <h5 className="card-title">Learn About Kakuro</h5>
+              <img 
+                src={kakuroImg} 
+                style={{ width: '20%', height: 'auto' }} 
+                alt="Kakuro Puzzle" 
+              />
+              <p className="card-text">
+                Solve crossword-style number puzzles that test your arithmetic and logic skills.
+              </p>
+            </div>
+          </div>
+        </Link>
+      </div>
+
+    </div>
+
+
+      <p className="p-1 fw-semibold">
+        Please log in or create an account to get started.
+      </p>
+      <div className="d-flex justify-content-center gap-4 mt-1">
+        <Link
+          to="/login"
+          className="btn btn-md"
+          style={{
+            backgroundColor: '#8b4cad',
+            color: '#fff',
+            border: 'none',
+          }}
+        >
+          Login
+        </Link>
+
+        <Link
+          to="/signup"
+          className="btn btn-outline btn-md"
+          style={{
+            border: '2px solid #8b4cad',
+            color: '#8b4cad',
+          }}
+        >
+          Create Account
+        </Link>
       </div>
     </div>
   );

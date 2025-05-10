@@ -73,7 +73,7 @@ function Dashboard() {
       </div>
 
       <div className="col-md-3 mb-3">
-        <Link to="/kakuro/" className="text-decoration-none text-dark">
+        <Link to="/kakuro/new" className="text-decoration-none text-dark">
           <div className="card h-100 bg-light">
             <div className="card-body">
               <h5 className="card-title">Kakuro</h5>
@@ -121,7 +121,7 @@ function Dashboard() {
       </div>
 
       <div className="col-md-3 mb-3">
-        <Link to="/tents/" className="text-decoration-none text-dark">
+        <Link to="/tents/new" className="text-decoration-none text-dark">
           <div className="card h-100 bg-light">
             <div className="card-body">
               <h5 className="card-title">Tents</h5>
