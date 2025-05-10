@@ -12,6 +12,11 @@ import NotFound from "./pages/NotFound";
 import ErrorPage from "./pages/ErrorPage";
 import SudGame from "./components/SudGame";
 import NonoGame from "./components/NonoGame";
+import TwoFourPage from "./pages/TwoFourPage";
+import PuzzleFifteen from "./pages/PuzzleFifteen";
+import Dashboard from "./pages/Dashboard";
+import MineGame from "./minesweeper/MineGame";
+
 import KakuroPage from "./pages/KakuroPage";
 import TentsPage from "./pages/TentsPage";
 import KakuroNewPage from "./pages/KakuroNewPage";
@@ -36,11 +41,15 @@ const router = createBrowserRouter([
         { path: "/sudoku/", element: <SudPage />},
         { path: "/nonogram/", element: <NonoPage />},
         { path: "/nonogram/:id", element: <NonoGame /> },
+        { path: "/2048/", element: <TwoFourPage /> },
+        { path: "/puzzle-15/", element: <PuzzleFifteen /> },
+        { path: "/minesweeper/", element: <MineGame /> },
         { path: "/kakuro/new", element: <KakuroNewPage /> }, // <-- add this
         { path: "/kakuro/:id", element: <KakuroPage /> },  // newly added
         { path: "/tents/new", element: <TentsNewPage /> },
         { path: "/tents/:id", element: <TentsPage /> },    // newly added
         { path: "/profile/", element: <ProfilePage />}, 
+        { path: "/dashboard/", element: <Dashboard />}, 
         { path: "*", element: <NotFound /> },
       ],
       errorElement: <ErrorPage />,

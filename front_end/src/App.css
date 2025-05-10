@@ -15,6 +15,11 @@
     border: 1px solid #ccc;
 }
 
+.wrong {
+  color: red;
+  font-weight: bold;
+}
+
 .sudoku-cell.clue {
     background-color: #f0f0f0;
     font-weight: bold;
@@ -172,3 +177,100 @@
     cursor: pointer;
     font-size: 0.7rem;
   }
+
+  /* 2048 css */
+.game-2048 .container {
+  width: 345px;
+  margin: auto;
+}
+
+.game-2048 .header {
+  display: flex;
+}
+
+.game-2048 .title {
+  font-family: sans-serif;
+  flex: 1;
+  font-weight: 700;
+  font-size: 45px;
+  color: #776e65;
+}
+
+.game-2048 .button-container {
+  flex: 1;
+  margin-top: auto;
+}
+
+.game-2048 .new-game-button {
+  padding: 5px;
+  background: #846f5b;
+  color: #f8f5f0;
+  width: 120px;
+  border-radius: 7px;
+  font-weight: 500;
+  margin-left: auto;
+  margin-bottom: auto;
+  cursor: pointer;
+  text-align: center;
+}
+
+.game-2048 .board-wrapper {
+  background: #ad9d8f;
+  width: max-content;
+  height: max-content;
+  margin: auto;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+  position: relative;
+}
+
+.game-2048 .game-over-overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 5px;
+  background: rgba(238, 228, 218, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.game-2048 .game-over-title {
+  font-size: 30px;
+  font-family: sans-serif;
+  font-weight: 900;
+  color: #776e65;
+  text-align: center;
+}
+
+.game-2048 .try-again-button {
+  padding: 10px;
+  background: #846f5b;
+  color: #f8f5f0;
+  width: 80px;
+  border-radius: 7px;
+  font-weight: 900;
+  cursor: pointer;
+  margin: 20px auto 0 auto;
+  text-align: center;
+}
+
+.game-2048 .block {
+  height: 80px;
+  width: 80px;
+  background: lightgray;
+  margin: 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 45px;
+  font-weight: 800;
+}
+
+.game-2048 .game-explanation {
+  width: inherit;
+  text-align: center;
+}

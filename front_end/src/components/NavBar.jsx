@@ -9,12 +9,13 @@ export default function NavBar({ user, setUser }) {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <h1>Pixel Puzzle</h1>
+        <h1>PuzzleCraft</h1>
       </div>
       <div className="navbar-right">
-      <Link to={"/"}>Home</Link><br></br>
+      {/* <Link to={"/"}>Home</Link><br></br> */}
         {user ? (
           <>
+            <Link to={"/dashboard/"}>Puzzle Dashboard</Link><br></br>
             <Link to={"/sudoku/"}>Sudoku</Link><br></br>
             <Link to={"/nonogram/"}>Nonogram</Link><br></br>
             <Link to={"/tents/new"}>Tents</Link><br />
