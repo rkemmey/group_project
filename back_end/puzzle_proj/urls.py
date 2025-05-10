@@ -23,4 +23,5 @@ urlpatterns = [
     path('api/sudoku/', include('sud_app.urls')),
     path('api/user/', include('user_app.urls')),
     path('api/progress/', include('user_puzzles.urls')),
+    path('api/minewordle/', include('minewordle_app.urls')),
 ]
