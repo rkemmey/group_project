@@ -3,7 +3,7 @@ import './wordle.css'
 import Board from './wordle_components/Board';
 import KeyBoard from './wordle_components/KeyBoard';
 import GameOver from './wordle_components/GameOver';
-import { boardDefault, generateWordSet } from './Words';
+import { boardDefault, generateWord } from './Words';
 import { useState, useEffect } from 'react';
 import { WordleContext } from './WordleContext';
 
@@ -24,7 +24,7 @@ const WordleGame = () => {
 
   // on mount, generate word list and choose word from that list
   useEffect(() => {
-    generateWordSet().then((words) => {
+    generateWord().then((words) => {
       // converts to uppercase to match user's input
       setCorrectWord(words.todaysWord.toUpperCase())
     })

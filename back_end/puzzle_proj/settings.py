@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'user_app',
     'rest_framework.authtoken',
     'user_puzzles',
+    'minewordle_app'
 ]
 
 MIDDLEWARE = [
