@@ -85,9 +85,9 @@
   background-color: #808085;
 }
 
-#disabled {
+/* #disabled {
   background-color: #3a393c;
-}
+} */
 
 .gameOver {
   display: flex;
