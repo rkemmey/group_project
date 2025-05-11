@@ -1,3 +1,4 @@
+//MineGame.jsx
 import './minesweeper.css';
 import { useState, useEffect } from 'react';
 import GameInfo from './mine_components/GameInfo';
@@ -6,7 +7,7 @@ import { createEmptyBoard, plantMines,
   adjacentCells, countNeighborMines, filterCellsByType
 } from './mine_components/mine_utilities';
 
-const Game = () => {
+const MineGame = () => {
   // difficulty and board settings (easy is default)
   const [difficulty, setDifficulty] = useState("easy");
   const [height, setHeight] = useState(8);
@@ -191,4 +192,4 @@ const Game = () => {
   );
 };
 
-export default Game;
+export default MineGame;

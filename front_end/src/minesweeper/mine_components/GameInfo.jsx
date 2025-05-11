@@ -1,3 +1,4 @@
+//GameInfo.jsx
 // gameinfo component displays games status and remaining mine count
 const GameInfo = ({ mineCount, gameStatus}) => {
   const getStatusClass = () => { 

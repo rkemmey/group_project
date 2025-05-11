@@ -1,3 +1,4 @@
+//mine_utilities.jsx
 // Utility functions for use on game board
 
 //create the initial array of data for all cells in the grid
