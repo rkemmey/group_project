@@ -29,7 +29,7 @@ function AboutWordle() {
           <div className="bg-light rounded p-4 mb-3">
             <h3>How to Play</h3>
             <p>
-             Each round begins with a blank grid and six chances to guess the hidden five-letter word. In this version, you can play using your physical keyboard or by clicking on the on-screen keys to enter letters, delete them, and submit your guesses. You win if you guess the correct word within six tries. After each guess, the game provides color-coded feedback on each letter. Or you can reset the game for a new word!
+             Each round begins with a blank grid and six chances to guess the hidden five-letter word. In this version, you can play using your physical keyboard or by clicking on the on-screen keys to enter letters, delete them, and submit your guesses. You win if you guess the correct word within six tries. You can also reset the game for a new word at any time!
             </p>
             <ul>
               <li>If it's green, the letter is in the correct position.</li>
