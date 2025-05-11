@@ -3,27 +3,28 @@ import './minesweeper.css';
 import { useState, useEffect } from 'react';
 import GameInfo from './mine_components/GameInfo';
 import Board from './mine_components/Board';
-import { createEmptyBoard, plantMines, 
-  adjacentCells, countNeighborMines, filterCellsByType
+import {
+  createEmptyBoard,
+  plantMines,
+  adjacentCells,
+  countNeighborMines,
+  filterCellsByType
 } from './mine_components/mine_utilities';
 
 const MineGame = () => {
-  // difficulty and board settings (easy is default)
+  // difficlty settings, board dimesnsions, minecount
   const [difficulty, setDifficulty] = useState("easy");
   const [height, setHeight] = useState(8);
   const [width, setWidth] = useState(8);
   const [mines, setMines] = useState(10);
-
-  // track game data
+  // initializes game state
   const [gameData, setGameData] = useState([]);
-  // track game status (win, lose, in-progress )
-  const [gameStatus, setGameStatus] = useState("Game in Progress");
-  // track remaining mines
-  const [mineCount, setMineCount] = useState(mines);
-  // used to trigger board reset
+  const [gameStatus, setGameStatus] = useState("Game in progress");
+  const [score, setScore] = useState(0);
+  // used to re-trigger useEffect to reset game
   const [key, setKey] = useState(false);
 
-  // map difficulty to board settings (height,width,mines)
+  // sets height, width, and mine count based on difficulty
   const getBoardSettings = (level) => {
     switch (level) {
       case "medium":
@@ -35,48 +36,44 @@ const MineGame = () => {
     }
   };
 
-  // update board settings when difficulty changes
+  //when difficulty changes, update board settings and reset game
   useEffect(() => {
     const { height, width, mines } = getBoardSettings(difficulty);
     setGameStatus("Game in progress");
     setHeight(height);
     setWidth(width);
     setMines(mines);
-    setMineCount(mines);
+    setScore(0);
+    // toggle key to force reinit of gameData
     setKey(prev => !prev);
   }, [difficulty]);
 
-  // initialize board on mount and when difficulty changes or reset
+  // when height, width, mines, or key changes, initialize the board
   useEffect(() => {
-    setGameData(initgameData(height, width, mines));
+    setGameData(initGameData(height, width, mines));
   }, [height, width, mines, key]);
 
-  // initialize game data (board setup)
-  const initgameData = (height, width, mines) => {
-    // create empty game board
+  // initializes gameboard: creates cells, places mines, counts neighboring mines
+  const initGameData = (height, width, mines) => {
     let data = createEmptyBoard(height, width);
-    // place mines
     data = plantMines(data, height, width, mines);
-    // count neighboring mines
     data = countNeighborMines(data, height, width);
     return data;
   };
 
-  // reveal board at end of game(win or loss)
+  // reveals all cells, win or lose
   const revealBoard = () => {
-    // change all cell values to isRevealed
     let updatedData = gameData.map(row => row.map(item => ({ ...item, isRevealed: true })));
     setGameData(updatedData);
   };
 
-  // reveal adjacent empty cells and non-mine neighboring cells
+  // recursively reveals adjacent empty (non-mine) cells
   const revealEmptyCells = (y, x, data) => {
-    // get grid around the input cell
     let area = adjacentCells(y, x, data, height, width);
     area.forEach(value => {
-      // if conditions are met, continue revealing neighbor cells
       if (!value.isFlagged && !value.isRevealed && (value.isEmpty || !value.isMine)) {
         data[value.y][value.x].isRevealed = true;
+        // continue revealing empty neighbors
         if (value.isEmpty) {
           revealEmptyCells(value.y, value.x, data);
         }
@@ -85,83 +82,69 @@ const MineGame = () => {
     return data;
   };
 
-  // handle left click logic
+  // updates score bsaed on how many safe cells have been revealed
+  const updateScore = (data) => {
+    const revealedNonMines = filterCellsByType(data, item => item.isRevealed && !item.isMine);
+    setScore(revealedNonMines.length);
+  };
+
+  // adds win bonus, scaled by difficulty
+  const addWinBonus = () => {
+    const bonus = difficulty === "easy" ? 100 : difficulty === "medium" ? 200 : 300;
+    setScore(prev => prev + bonus);
+  };
+
+  // handles left-clicks on cell
   const handleCellClick = (y, x) => {
-    // do nothing ic already clicked or flagged
     if (gameData[y][x].isRevealed || gameData[y][x].isFlagged) return;
-    // lose game if mine
+    // if user clicks on a mine, they lose
     if (gameData[y][x].isMine) {
       setGameStatus("You Lost.");
       revealBoard();
       return;
     }
-    //otherwise, reveal cell
+    // clone the gaeme state and reveal the clicked cell
     let updatedData = [...gameData];
-    updatedData[y][x].isFlagged = false;
     updatedData[y][x].isRevealed = true;
-    // if empty, reveal neighboring non-mine cells
+    updatedData[y][x].isFlagged = false;
+    // if the cell is empty, reveal its neighbors
     if (updatedData[y][x].isEmpty) {
       updatedData = revealEmptyCells(y, x, updatedData);
     }
-    // if only mines remain unclicked, win game
-    if (filterCellsByType(updatedData, dataitem => !dataitem.isRevealed).length === mines) {
-      setMineCount(0);
+
+    // check if won (only mines remain unrevealed)
+    const unrevealed = filterCellsByType(updatedData, cell => !cell.isRevealed);
+    if (unrevealed.length === mines) {
       setGameStatus("You Win!");
+      addWinBonus();
       revealBoard();
-      return;
     }
+
     setGameData(updatedData);
-    // update mine-counter
-    setMineCount(mines - filterCellsByType(updatedData, dataitem => dataitem.isFlagged).length);
+    updateScore(updatedData);
   };
 
-  // handle right-click logic
+  // handles right-cllck to toggle flag on cell
   const handleContextMenu = (e, y, x) => {
-    // don't show right click menu
     e.preventDefault();
-    // do nothing if already revealed
     if (gameData[y][x].isRevealed) return;
+
     let updatedData = [...gameData];
-    let minesLeft = mineCount;
-
-    // unflag if currently flagged
-    if (updatedData[y][x].isFlagged) {
-      updatedData[y][x].isFlagged = false;
-      minesLeft++;
-    } else {
-      // add flag, but prevent adding more than allowed flags
-      if (minesLeft === 0) return;
-      updatedData[y][x].isFlagged = true;
-      minesLeft--;
-    }
-
-    if (minesLeft === 0) {
-      const mineArray = filterCellsByType(updatedData, dataitem => dataitem.isMine);
-      const flagArray = filterCellsByType(updatedData, dataitem => dataitem.isFlagged);
-      // check for winning condition:
-      // win if flagged cells === cells with mines
-      if (JSON.stringify(mineArray) === JSON.stringify(flagArray)) {
-        setGameStatus("You Win!");
-        setMineCount(0);
-        revealBoard();
-        return;
-      }
-    }
+    updatedData[y][x].isFlagged = !updatedData[y][x].isFlagged;
     setGameData(updatedData);
-    setMineCount(minesLeft);
   };
 
-  // reset game--toggle key to reset status, minecount, and board
+  // resets board while keeping current difficulty
   const resetGame = () => {
     setGameStatus("Game in progress");
-    setMineCount(mines);
+    setScore(0);
     setKey(prev => !prev);
   };
-  /* 
-  - display dropdown menu for selecting difficulty (easy by default)
-  - display mine counter and game status
-  - render game board
-  - render button for restarting game
+
+  /*
+  - difficulty and reset controls
+  - game info (status, score, minecount)
+  - game board
   */
   return (
     <div className="game">
@@ -172,7 +155,7 @@ const MineGame = () => {
             id="difficulty"
             value={difficulty}
             onChange={(e) => setDifficulty(e.target.value)}
-            style={{ marginLeft: '0.5rem' }} // optional spacing between label and select
+            style={{ marginLeft: '0.5rem' }}
           >
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
@@ -180,9 +163,10 @@ const MineGame = () => {
           </select>
         </div>
         <button className="reset-button" onClick={resetGame}>Reset</button>
+        
       </div>
-  
-      <GameInfo mineCount={mineCount} gameStatus={gameStatus} />
+
+      <GameInfo score={score} gameStatus={gameStatus} mineCount={mines} />
       <Board
         data={gameData}
         handleCellClick={handleCellClick}
