@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'user_app',
     'rest_framework.authtoken',
     'user_puzzles',
+    'kakuro_app',
+    'tents_app',
 ]
 
 MIDDLEWARE = [
@@ -145,5 +147,8 @@ AUTH_USER_MODEL = 'user_app.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
+        
     ],
+
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
 }

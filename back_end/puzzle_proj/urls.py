@@ -21,6 +21,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/nonogram/', include('nono_app.urls')),
     path('api/sudoku/', include('sud_app.urls')),
+
+    path('api/kakuro/', include('kakuro_app.urls')),
+    path('api/tents/', include('tents_app.urls')),
+
     path('api/user/', include('user_app.urls')),
     path('api/progress/', include('user_puzzles.urls')),
 ]

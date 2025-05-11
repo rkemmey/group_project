@@ -17,6 +17,12 @@ import PuzzleFifteen from "./pages/PuzzleFifteen";
 import Dashboard from "./pages/Dashboard";
 import MineGame from "./minesweeper/MineGame";
 
+import KakuroPage from "./pages/KakuroPage";
+import TentsPage from "./pages/TentsPage";
+import KakuroNewPage from "./pages/KakuroNewPage";
+import TentsNewPage from "./pages/TentsNewPage";
+import AboutKakuro from "./pages/AboutKakuro";
+import AboutTents from "./pages/AboutTents";
 
 const router = createBrowserRouter([
     {
@@ -28,13 +34,20 @@ const router = createBrowserRouter([
         { path: "/signup/", element: <SignUp />},
         { path: "/about-sudoku/", element: <AboutSud />},
         { path: "/about-nonogram/", element: <AboutNono />},
+
+        { path: "/about-kakuro/", element: <AboutKakuro />},
+        { path: "/about-tents/", element: <AboutTents />},
+
         { path: "/sudoku/", element: <SudPage />},
-        { path: "/sudoku/:id", element: <SudGame /> },
         { path: "/nonogram/", element: <NonoPage />},
         { path: "/nonogram/:id", element: <NonoGame /> },
         { path: "/2048/", element: <TwoFourPage /> },
         { path: "/puzzle-15/", element: <PuzzleFifteen /> },
         { path: "/minesweeper/", element: <MineGame /> },
+        { path: "/kakuro/new", element: <KakuroNewPage /> }, // <-- add this
+        { path: "/kakuro/:id", element: <KakuroPage /> },  // newly added
+        { path: "/tents/new", element: <TentsNewPage /> },
+        { path: "/tents/:id", element: <TentsPage /> },    // newly added
         { path: "/profile/", element: <ProfilePage />}, 
         { path: "/dashboard/", element: <Dashboard />}, 
         { path: "*", element: <NotFound /> },
