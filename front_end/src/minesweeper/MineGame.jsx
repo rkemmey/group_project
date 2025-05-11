@@ -163,9 +163,7 @@ const MineGame = () => {
           </select>
         </div>
         <button className="reset-button" onClick={resetGame}>Reset</button>
-        
       </div>
-
       <GameInfo score={score} gameStatus={gameStatus} mineCount={mines} />
       <Board
         data={gameData}
