@@ -3,6 +3,7 @@ import './minesweeper.css';
 import { useState, useEffect } from 'react';
 import GameInfo from './mine_components/GameInfo';
 import Board from './mine_components/Board';
+import TopScores from './mine_components/TopScores';
 import {
   createEmptyBoard,
   plantMines,
@@ -23,6 +24,9 @@ const MineGame = () => {
   const [score, setScore] = useState(0);
   // used to re-trigger useEffect to reset game
   const [key, setKey] = useState(false);
+  // show user's top scores
+  const [showTopScores, setShowTopScores] = useState(false);
+
 
   // sets height, width, and mine count based on difficulty
   const getBoardSettings = (level) => {
@@ -170,6 +174,12 @@ const MineGame = () => {
         handleCellClick={handleCellClick}
         handleContextMenu={handleContextMenu}
       />
+       <div style={{ marginTop: '1rem' }}>
+        <button onClick={() => setShowTopScores(prev => !prev)}>
+          {showTopScores ? 'Hide' : 'Show'} Top Scores
+        </button>
+        {showTopScores && <TopScores />}
+      </div>
     </div>
   );
 };
