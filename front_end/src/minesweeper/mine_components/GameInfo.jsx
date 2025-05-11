@@ -1,5 +1,5 @@
 //GameInfo.jsx
-// gameinfo component displays games status, mine count, and score
+// gameinfo component displays games status, mine count, and final score
 const GameInfo = ({ score, gameStatus, mineCount }) => {
   return (
     <div className="game-info">
@@ -10,7 +10,7 @@ const GameInfo = ({ score, gameStatus, mineCount }) => {
         <strong>Mines:</strong> {mineCount}
       </div>
       <div className="score">
-        <strong>Score:</strong> {score}
+        <strong>Final Score:</strong> {score}
       </div>
     </div>
   );

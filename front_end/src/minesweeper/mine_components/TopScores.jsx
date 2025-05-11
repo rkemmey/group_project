@@ -1,4 +1,5 @@
 // TopScores.jsx
+// simply displays the user's top 10 scores (regardless of difficulty)
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -57,4 +58,3 @@ const TopScores = () => {
 };
 
 export default TopScores;
-

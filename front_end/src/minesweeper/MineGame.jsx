@@ -11,73 +11,73 @@ import {
   countNeighborMines,
   filterCellsByType
 } from './mine_components/mine_utilities';
+import axios from 'axios';
 
 const MineGame = () => {
-  // difficlty settings, board dimesnsions, minecount
+  // states for board settings
   const [difficulty, setDifficulty] = useState("easy");
   const [height, setHeight] = useState(8);
   const [width, setWidth] = useState(8);
   const [mines, setMines] = useState(10);
-  // initializes game state
+  // game-rlated state variables
   const [gameData, setGameData] = useState([]);
   const [gameStatus, setGameStatus] = useState("Game in progress");
-  const [score, setScore] = useState(0);
-  // used to re-trigger useEffect to reset game
+  const [score, setScore] = useState(null);
+  // used to force re-render when game settings changes
   const [key, setKey] = useState(false);
-  // show user's top scores
+  // toggle top scores list
   const [showTopScores, setShowTopScores] = useState(false);
-
-
-  // sets height, width, and mine count based on difficulty
+  // returns board settings based on selected difficulty
   const getBoardSettings = (level) => {
     switch (level) {
       case "medium":
         return { height: 12, width: 12, mines: 20 };
       case "hard":
         return { height: 16, width: 16, mines: 40 };
+      // default is easy
       default:
         return { height: 8, width: 8, mines: 10 };
     }
   };
-
-  //when difficulty changes, update board settings and reset game
+  // runs when difficulty changes, adjusting board settings accordingly
   useEffect(() => {
     const { height, width, mines } = getBoardSettings(difficulty);
     setGameStatus("Game in progress");
     setHeight(height);
     setWidth(width);
     setMines(mines);
-    setScore(0);
-    // toggle key to force reinit of gameData
+    setScore(null);
     setKey(prev => !prev);
   }, [difficulty]);
 
-  // when height, width, mines, or key changes, initialize the board
+  // effect hook that initializes game data whenever board settings change
   useEffect(() => {
     setGameData(initGameData(height, width, mines));
   }, [height, width, mines, key]);
 
-  // initializes gameboard: creates cells, places mines, counts neighboring mines
+  /* initializes new game
+  - creates empty board
+  - plants random mines around board
+  - counts neighboring mines around cells
+  */
   const initGameData = (height, width, mines) => {
     let data = createEmptyBoard(height, width);
     data = plantMines(data, height, width, mines);
     data = countNeighborMines(data, height, width);
     return data;
   };
-
-  // reveals all cells, win or lose
+  // reveals entire board when player wins or loses
   const revealBoard = () => {
     let updatedData = gameData.map(row => row.map(item => ({ ...item, isRevealed: true })));
     setGameData(updatedData);
   };
 
-  // recursively reveals adjacent empty (non-mine) cells
+  // recursively reveals adjacent empty cells
   const revealEmptyCells = (y, x, data) => {
     let area = adjacentCells(y, x, data, height, width);
     area.forEach(value => {
       if (!value.isFlagged && !value.isRevealed && (value.isEmpty || !value.isMine)) {
         data[value.y][value.x].isRevealed = true;
-        // continue revealing empty neighbors
         if (value.isEmpty) {
           revealEmptyCells(value.y, value.x, data);
         }
@@ -86,69 +86,94 @@ const MineGame = () => {
     return data;
   };
 
-  // updates score bsaed on how many safe cells have been revealed
-  const updateScore = (data) => {
+  // calculates score based on nmber of revealed non-mine cells and win bonus
+  const calculateScore = (data, isWin = false) => {
     const revealedNonMines = filterCellsByType(data, item => item.isRevealed && !item.isMine);
-    setScore(revealedNonMines.length);
+    let baseScore = revealedNonMines.length;
+    if (isWin) {
+      const bonus = difficulty === "easy" ? 100 : difficulty === "medium" ? 200 : 300;
+      baseScore += bonus;
+    }
+    return baseScore;
   };
 
-  // adds win bonus, scaled by difficulty
-  const addWinBonus = () => {
-    const bonus = difficulty === "easy" ? 100 : difficulty === "medium" ? 200 : 300;
-    setScore(prev => prev + bonus);
+  // sae final score to backend via an API POST request
+  const saveScore = async (finalScore, difficulty) => {
+    try {
+      const response = await axios.post(
+        'http://127.0.0.1:8000/api/minewordle/user_top_scores/',
+        // data to be sent in request body
+        { score: finalScore, difficulty },
+        {
+          headers: {
+            // add token from localStorage for authentication
+            'Authorization': `Token ${localStorage.getItem('token')}`
+          }
+        }
+      );
+      console.log('Score saved:', response.data);
+    } catch (err) {
+      console.error('Failed to save score:', err);
+    }
   };
 
-  // handles left-clicks on cell
+  // handles left-click (reveal cell or end game if mine clicked)
   const handleCellClick = (y, x) => {
+    if (gameStatus !== "Game in progress") return;
     if (gameData[y][x].isRevealed || gameData[y][x].isFlagged) return;
-    // if user clicks on a mine, they lose
+
     if (gameData[y][x].isMine) {
-      setGameStatus("You Lost.");
+      const updatedData = gameData.map(row => row.map(cell => ({ ...cell })));
+      updatedData[y][x].isRevealed = true;
       revealBoard();
+      const finalScore = calculateScore(updatedData, false);
+      setScore(finalScore);
+      setGameStatus("You Lost.");
+      saveScore(finalScore, difficulty);
       return;
     }
-    // clone the gaeme state and reveal the clicked cell
+
     let updatedData = [...gameData];
     updatedData[y][x].isRevealed = true;
     updatedData[y][x].isFlagged = false;
-    // if the cell is empty, reveal its neighbors
     if (updatedData[y][x].isEmpty) {
       updatedData = revealEmptyCells(y, x, updatedData);
     }
 
-    // check if won (only mines remain unrevealed)
+    // check if game is won (all non-mine cells revealed)
     const unrevealed = filterCellsByType(updatedData, cell => !cell.isRevealed);
     if (unrevealed.length === mines) {
-      setGameStatus("You Win!");
-      addWinBonus();
       revealBoard();
+      const finalScore = calculateScore(updatedData, true);
+      setScore(finalScore);
+      setGameStatus("You Win!");
+      saveScore(finalScore, difficulty);
     }
 
     setGameData(updatedData);
-    updateScore(updatedData);
   };
 
-  // handles right-cllck to toggle flag on cell
+  // handles right click to flag or unflag a cell
   const handleContextMenu = (e, y, x) => {
     e.preventDefault();
-    if (gameData[y][x].isRevealed) return;
+    if (gameData[y][x].isRevealed || gameStatus !== "Game in progress") return;
 
     let updatedData = [...gameData];
     updatedData[y][x].isFlagged = !updatedData[y][x].isFlagged;
     setGameData(updatedData);
   };
 
-  // resets board while keeping current difficulty
+  // resets the game to start a new round
   const resetGame = () => {
     setGameStatus("Game in progress");
-    setScore(0);
+    setScore(null);
     setKey(prev => !prev);
   };
 
   /*
-  - toggle user's top scores
+  - toggles user's top scores
   - difficulty and reset controls
-  - game info (status, score, minecount)
+  - game info (status, minecount, final score)
   - game board
   */
   return (
@@ -183,7 +208,6 @@ const MineGame = () => {
       />
     </div>
   );
-  
 };
 
 export default MineGame;
