@@ -18,7 +18,7 @@ const Key = ({ keyVal, bigKey } ) => {
   }
   
   // set css class big or disabled as appropriate, display key value
-  // maintain disabled logic if I want to go back to it
+  // maintaining some disabled logic if I want to go back to it
   return (
     <div className="key" 
       // id={bigKey ? "big" : disabled && "disabled"} 
