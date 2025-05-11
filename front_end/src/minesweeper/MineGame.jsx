@@ -146,6 +146,7 @@ const MineGame = () => {
   };
 
   /*
+  - toggle user's top scores
   - difficulty and reset controls
   - game info (status, score, minecount)
   - game board
@@ -153,6 +154,12 @@ const MineGame = () => {
   return (
     <div className="game">
       <div className="controls">
+        <div style={{ marginBottom: '1rem' }}>
+          <button onClick={() => setShowTopScores(prev => !prev)}>
+            {showTopScores ? 'Hide' : 'Show'} Top Scores
+          </button>
+          {showTopScores && <TopScores />}
+        </div>
         <div>
           <label htmlFor="difficulty">Difficulty:</label>
           <select
@@ -174,14 +181,9 @@ const MineGame = () => {
         handleCellClick={handleCellClick}
         handleContextMenu={handleContextMenu}
       />
-       <div style={{ marginTop: '1rem' }}>
-        <button onClick={() => setShowTopScores(prev => !prev)}>
-          {showTopScores ? 'Hide' : 'Show'} Top Scores
-        </button>
-        {showTopScores && <TopScores />}
-      </div>
     </div>
   );
+  
 };
 
 export default MineGame;

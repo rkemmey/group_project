@@ -37,7 +37,7 @@ const TopScores = () => {
       <table>
         <thead>
           <tr>
-            <th>User</th>
+            <th>User's</th>
             <th>Score</th>
             <th>Difficulty</th>
           </tr>
