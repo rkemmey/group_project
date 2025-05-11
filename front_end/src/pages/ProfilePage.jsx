@@ -85,10 +85,14 @@ const ProfilePage = () => {
         <div className="rounded p-3">
           <h5>Learn How to Play</h5>
           <ul>
-            <li><Link to="/about-sudoku" className="custom-link">Learn How to Play Sudoku</Link></li>
-            <li><Link to="/about-nonogram" className="custom-link">Learn How to Play Nonogram</Link></li>
+            <li><Link to="/about-mines" className="custom-link">About Minesweeper</Link></li>
+            <li><Link to="/about-wordle" className="custom-link">About Wordle</Link></li>
             <li><Link to="/about-kakuro" className="custom-link">About Kakuro</Link></li>
             <li><Link to="/about-tents" className="custom-link">About Tents</Link></li>
+            <li><Link to="/about-2048" className="custom-link">About 2048</Link></li>
+            <li><Link to="/about-15" className="custom-link">About 15 Tiles</Link></li>
+            <li><Link to="/about-sudoku" className="custom-link">About Sudoku</Link></li>
+            <li><Link to="/about-nonogram" className="custom-link">About Nonogram</Link></li>
           </ul>
         </div>
 

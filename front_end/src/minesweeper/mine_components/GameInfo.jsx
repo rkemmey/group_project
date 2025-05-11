@@ -1,16 +1,17 @@
-// gameinfo component displays games status and remaining mine count
-const GameInfo = ({ mineCount, gameStatus}) => {
-  const getStatusClass = () => { 
-    // determines styling class to apply based on gameStatus
-    if (gameStatus === "You Win!") return "win";
-    if (gameStatus === "You Lost.") return "lose";
-    return "";
-  };
-  // renders game info container appropriate status class
+//GameInfo.jsx
+// gameinfo component displays games status, mine count, and final score
+const GameInfo = ({ score, gameStatus, mineCount }) => {
   return (
-    <div className={`game-info ${getStatusClass()}`}>
-      <span className="info">Mines remaining: {mineCount}</span>
-      <h1 className="info">{gameStatus}</h1>
+    <div className="game-info">
+      <div className="status">
+        <strong>Status:</strong> {gameStatus}
+      </div>
+      <div className="mines">
+        <strong>Mines:</strong> {mineCount}
+      </div>
+      <div className="score">
+        <strong>Final Score:</strong> {score}
+      </div>
     </div>
   );
 };

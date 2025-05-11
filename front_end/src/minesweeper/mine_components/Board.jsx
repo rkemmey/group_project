@@ -1,3 +1,4 @@
+//Board.jsx
 import Cell from './Cell';
 /*
 - set board length dynamically based on difficulty selected

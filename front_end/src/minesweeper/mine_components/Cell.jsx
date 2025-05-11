@@ -1,3 +1,4 @@
+//Cell.jsx
 /*
 - stateless cell component represents single cell with custom variables and props.
 - value = properties of cell

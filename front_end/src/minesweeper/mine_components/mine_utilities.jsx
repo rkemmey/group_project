@@ -1,3 +1,4 @@
+//mine_utilities.jsx
 // Utility functions for use on game board
 
 //create the initial array of data for all cells in the grid
@@ -104,14 +105,14 @@ export const countNeighborMines = (data, height, width) => {
   return updatedData;
 };
 
-// filter the board based on condition defined by checkType (flagged or mine)
+// filter the board based on condition defined by checkType (an identical mine-property)
 export const filterCellsByType = (data, checkType) => {
   // initialize array to store cells that meet the condition
   let resultArray = [];
   // loop through each row, followed by each cell
   data.forEach(datarow => {
       datarow.forEach(dataitem => {
-      // applyy checktype function to determine if cell should be included
+      // apply checktype function to determine if cell should be included
       if (checkType(dataitem)) {
           resultArray.push(dataitem);
       }
