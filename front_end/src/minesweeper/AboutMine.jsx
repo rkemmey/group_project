@@ -37,6 +37,7 @@ function AboutMine() {
               <li>If it's safe, it will either reveal a number indicating how many adjacent squares contain mines...</li>
               <li>...or an empty square, which often triggers a chain reaction, automatically revealing nearby safe squares until numbered squares stop the cascade.</li>
               <li>Flag the squares by right-clicking them and right-click those same squares again to remove a wrongly placed flag.</li>
+              <li>You get a score bonus for winning (scaling with difficulty), but you can still accumulate points even if you step on a mine.</li>
             </ul>
           </div>
     
