@@ -12,8 +12,6 @@ const WordleGame = () => {
   const [board, setBoard] = useState(boardDefault)
   // current attempt tracking row (attempt) and column (letterPos)
   const [currAttempt, setCurrAttempt] = useState({ attempt: 0, letterPos: 0})
-  // guessed letters that aren't in correct word
-  const [disabledLetters, setDisabledLetters] = useState([])
   // word to guess
   const [correctWord, setCorrectWord] = useState("")
   // tracks whether the game has ended and if the user guessed correctly
@@ -83,7 +81,6 @@ const WordleGame = () => {
           currAttempt, setCurrAttempt, 
           onSelectLetter, onDelete, onEnter, 
           correctWord, 
-          disabledLetters, setDisabledLetters, 
           gameOver, setGameOver}}>
         <div className="wordleGame">
           <Board />

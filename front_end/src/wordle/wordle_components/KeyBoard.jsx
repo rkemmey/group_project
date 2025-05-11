@@ -4,7 +4,7 @@ import { useCallback, useEffect, useContext, useMemo } from 'react';
 import { WordleContext } from '../WordleContext';
 
 const KeyBoard = () => {
-  const { onSelectLetter, onDelete, onEnter, disabledLetters } = useContext(WordleContext);
+  const { onSelectLetter, onDelete, onEnter } = useContext(WordleContext);
 
   // define keyboard rows
   const keys1 = useMemo(() => ["Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"], []);
@@ -31,7 +31,7 @@ const KeyBoard = () => {
     }
   }, [onEnter, onDelete, onSelectLetter, allKeys]);
 
-  // add event listner for keydown when component mounts
+  // add event listener for keydown when component mounts
   useEffect(() => {
     document.addEventListener("keydown", handleKeyBoard);
     return () => {
@@ -45,18 +45,18 @@ const KeyBoard = () => {
     <div className="keyboard">
       <div className="line1">
         {keys1.map((key) => (
-          <Key keyVal={key} key={key} disabled={disabledLetters.includes(key)}/>
+          <Key keyVal={key} key={key}/>
         ))}
       </div>
       <div className="line2">
         {keys2.map((key) => (
-          <Key keyVal={key} key={key} disabled={disabledLetters.includes(key)}/>
+          <Key keyVal={key} key={key}/>
         ))}
       </div>
       <div className="line3">
         <Key keyVal="ENTER" bigKey />
         {keys3.map((key) => (
-          <Key keyVal={key} key={key} disabled={disabledLetters.includes(key)}/>
+          <Key keyVal={key} key={key}/>
         ))}
         <Key keyVal="DELETE" bigKey />
       </div>
