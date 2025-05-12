@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'user_puzzles',
     'kakuro_app',
     'tents_app',
+    'minewordle_app'
 ]
 
 MIDDLEWARE = [

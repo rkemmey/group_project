@@ -57,7 +57,7 @@ const router = createBrowserRouter([
         { path: "/kakuro/:id", element: <KakuroPage /> },  // newly added
         { path: "/tents/new", element: <TentsNewPage /> },
         { path: "/tents/:id", element: <TentsPage /> },    // newly added
-
+        { path: "/wordle", element: < WordleGame /> },    // newly added
         { path: "/profile/", element: <ProfilePage />}, 
         { path: "/dashboard/", element: <Dashboard />}, 
         { path: "*", element: <NotFound /> },
