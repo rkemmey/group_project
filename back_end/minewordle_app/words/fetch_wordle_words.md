@@ -1,3 +1,4 @@
+After migrating the database or applying migrations,
 from postgreSQL shell, run:
 
 COPY words(word)
