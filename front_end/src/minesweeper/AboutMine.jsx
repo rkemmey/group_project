@@ -22,7 +22,7 @@ function AboutMine() {
           {/* Introduction */}
           <div className="rounded p-3 mb-2">
             <p>
-              Minesweeper is a classic single-player puzzle game centered around deduction, pattern recognition, and logical thinking. Your objective is to uncover all the safe squares—those without mines—without clicking on a mine, which ends the game. In this version, victory is achieved by flagging every square where a mine is.
+              Minesweeper is a classic single-player puzzle game centered around deduction, pattern recognition, and logical thinking. Your objective is to uncover all the safe squares—those without mines—without clicking on a mine, which ends the game. In this version, victory is achieved by uncovering all the squares without a mine.
             </p>
           </div>
     
