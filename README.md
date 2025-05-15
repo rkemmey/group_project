@@ -1,4 +1,4 @@
-# Puzzle Craft
+# PuzzleCraft
 
 **PuzzleCraft** is a simple app built to support solo puzzle solving with user profiles and interactive dashboards.
 
