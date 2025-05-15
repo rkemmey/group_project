@@ -94,6 +94,6 @@ npm install
 ## 🔗 Third-Party APIs
 
 - **NounProject API** – https://thenounproject.com/api/ 
-- **OpenWeatherMap API** – https://sudoku-api.vercel.app
+- **Dosuku API** – https://sudoku-api.vercel.app
 
 ---
