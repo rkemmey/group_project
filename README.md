@@ -5,6 +5,7 @@
 PuzzleCraft bridges the gap between casual relaxation and mental challenge with an expansive library of logic puzzles across 8 distinct games, each offering multiple difficulty levels and progress tracking. Whether you're killing five minutes or spending your evening sharpening your logical reasoning, PuzzleCraft makes it easy to experience the joy of mastering puzzles.
 
 Once you create a profile and login, utilize dashboard for individual game instructions
+
 ---
 
 ## ✨ Features
